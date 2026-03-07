@@ -34,7 +34,7 @@ chrono = { version = "0.4.44", features = ["serde"] }
 dotenvy = "0.15.7"
 
 # Random number generation (for mantra selection)
-rand = "0.10.0"
+rand = { version = "0.10.0", features = ["thread_rng"]}
 
 # Async trait support
 async-trait = "0.1.89"
