@@ -1,0 +1,44 @@
+[package]
+name = "mantra-service"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+# Async runtime - unlike Go's built-in goroutines, Rust needs an async executor
+tokio = { version = "1.50.0", features = ["full"] }
+
+# CLI parsing with derive macros - declarative CLI definition
+clap = { version = "4.5.60", features = ["derive"] }
+
+# Database with compile-time SQL verification
+sqlx = { version = "0.8.6", features = ["runtime-tokio", "sqlite", "chrono"] }
+
+# Email sending
+lettre = { version = "0.11.19", features = ["tokio1-native-tls", "smtp-transport", "builder"] }
+
+# Structured logging (more powerful than println!)
+tracing = "0.1.44"
+tracing-subscriber = { version = "0.3.22", features = ["env-filter"] }
+
+# Ergonomic error handling
+thiserror = "2.0.18"
+anyhow = "1.0.102"  # For application-level errors
+
+# Serialization/deserialization
+serde = { version = "1.0.228", features = ["derive"] }
+
+# Date/time handling
+chrono = { version = "0.4.44", features = ["serde"] }
+
+# Environment variables
+dotenvy = "0.15.7"
+
+# Random number generation (for mantra selection)
+rand = "0.10.0"
+
+# Async trait support
+async-trait = "0.1.89"
+
+[dev-dependencies]
+# For temporary files in tests
+tempfile = "3.26.0"
