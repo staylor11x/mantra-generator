@@ -1,4 +1,3 @@
-use chrono::Utc;
 use mantra_service::domain::{select_mantra, Mantra, MantraId};
 
 fn main() {
