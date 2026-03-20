@@ -38,21 +38,16 @@ struct MantraRow {
     id: i64,
     text: String,
     category: Option<String>,
-    created_at: String,
+    created_at: DateTime<Utc>,
 }
 
 impl From<MantraRow> for Mantra {
     fn from(row: MantraRow) -> Self {
-        // Parse the SQLite TEXT timestamp to DateTime<Utc>
-        let created_at = DateTime::parse_from_rfc3339(&row.created_at)
-            .map(|dt| dt.with_timezone(&Utc))
-            .unwrap_or_else(|_| Utc::now());
-
         Mantra::new(
             MantraId::new(row.id),
             row.text,
             row.category,
-            created_at,
+            row.created_at,
         )
     }
 }

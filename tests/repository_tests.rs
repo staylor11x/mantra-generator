@@ -248,3 +248,34 @@ async fn test_concurrent_reads() {
     assert_eq!(mantras2.len(), 2);
     assert_eq!(mantras3.len(), 2);
 }
+
+#[tokio::test]
+async fn test_created_at_timestamp_preserved(){
+    let repo = create_test_repo().await;
+
+    // Add a mantra
+    let mantra = repo
+        .add_mantra("Test timestamp".to_string(), None)
+        .await
+        .expect("Failed to add mantra");
+
+    let original_time = mantra.created_at;
+
+    // Wait a bit...
+    tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
+
+    // Retrieve the same mantra
+    let retreievd = repo
+        .get_mantra_by_id(mantra.id)
+        .await
+        .expect("Failed to get mantra");
+
+    // Timestamps should match
+    assert_eq!(
+        retreievd.created_at,
+        original_time,
+        "Created timestamp should be preserved! Got {:?}, expected {:?}",
+        retreievd.created_at,
+        original_time
+    );
+}
