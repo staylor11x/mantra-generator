@@ -38,3 +38,15 @@ An application to send a daily mantra to a user, desgined to run on raspberry pi
 - lettre
 - tracing
 - thiserror
+
+## Running Tests
+
+ Run all the tests
+ ```sh
+ cargo test
+ ```
+
+ Run only the integration tests
+ ```sh
+ cargo test --test repository_tests
+ ```
