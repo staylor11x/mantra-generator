@@ -240,3 +240,6 @@ target
 
 # VSCode
 .vscode
+
+# Environment variables
+.env
